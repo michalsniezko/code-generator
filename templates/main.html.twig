@@ -1,8 +1,24 @@
-{% block body %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{% block title %}Code Generator{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/public.css') }}">
+    {% endblock %}
+</head>
 
-{% block title %}
+<body>
 
-{% endblock %}
+<h1>Code Generator</h1>
 
+<div>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+</div>
+
+</body>
+</html>
