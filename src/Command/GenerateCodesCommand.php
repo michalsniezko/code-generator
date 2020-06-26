@@ -7,7 +7,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Exception\IOException;
 
 class GenerateCodesCommand extends Command
 {
@@ -45,11 +44,11 @@ class GenerateCodesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $path = $input->getArgument('path');
-        $number = $input->getArgument('number');
-        $length = $input->getArgument('length');
+        $number = (int) $input->getArgument('number');
+        $length = (int) $input->getArgument('length');
 
-        if (!$length > 0 || !$number > 0) {
-            $output->writeln('Length of code and number of codes must be greater than 0!');
+        if (!$length > 0 || !$number > 0 || !is_numeric($length) || !is_numeric($number)) {
+            $output->writeln('Length of code and number of codes must be number greater than 0!');
             return Command::FAILURE;
         }
 

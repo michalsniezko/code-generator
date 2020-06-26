@@ -11,7 +11,8 @@ Aby przetestować aplikację:
 Aby przetestować aplikację w przeglądarce, wejść na `localhost:8000`
 
 Aby przetestować aplikację CLI użyć komendy `php bin/console generate`, na przykład:
-`php bin/console generate 10 20 'C:\Users\Michael\kody.txt'`
+- Windows: `php bin/console generate 10 20 'C:\Users\Michael\kody.txt'`
+- Linux/MacOS `php bin/console generate 50, 10, '/Users/michalsniezko/mojekody.txt'`
 
 Użyłem argumentów CLI zamiast opcji gdyż te drugie są zawsze opcjonalne,
  a w przypadku tej aplikacji użytkownik musi podać
