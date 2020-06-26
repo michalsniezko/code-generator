@@ -37,23 +37,28 @@ class MainController extends AbstractController
     {
         $form = $this->createForm(GeneratorFormType::class);
         $form->handleRequest($request);
+        $logicError = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            try {
+                $file = $this->generator->getFileWithCodes($data['numberOfCodes'], $data['lengthOfCode']);
+                $response = new BinaryFileResponse($file);
+                $response->headers->set('Content-Type', 'text/plain');
+                $response->setContentDisposition(
+                    ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                    self::FILENAME
+                );
 
-            $file = $this->generator->getFileWithCodes($data['numberOfCodes'], $data['lengthOfCode']);
-
-            $response = new BinaryFileResponse($file);
-            $response->headers->set('Content-Type', 'text/plain');
-            $response->setContentDisposition(
-                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-                self::FILENAME
-            );
-            return $response;
+                return $response;
+            } catch (\LogicException $exception) {
+                $logicError = $exception->getMessage();
+            }
         }
 
         return $this->render('main.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'error' => $logicError,
         ]);
     }
 }

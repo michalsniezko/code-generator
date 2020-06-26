@@ -17,6 +17,13 @@ class CodeGenerator
      */
     public function getFileWithCodes(int $numberOfCodes, int $codeLength, string $filePath = null): string
     {
+        $maxVariations = pow(strlen($this->inputSeed), $codeLength);
+        if ($numberOfCodes > $maxVariations) {
+            throw new \LogicException(
+                sprintf('Cannot create more than %d unique codes of length %d', $maxVariations, $codeLength)
+            );
+        }
+
         return $this->prepareFile($this->generateCodes($numberOfCodes, $codeLength), $filePath);
     }
 
