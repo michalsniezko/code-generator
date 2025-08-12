@@ -1,23 +1,28 @@
-Ta aplikacja tworzy losowe, unikalne kody i zapisuje je w pliku w ścieżce podanej przez użytkownika lub 
-pozwala pobrać taki plik na podstawie formularza wyświetlonego w przeglądarce.
+This application generates random, unique codes and saves them to a file at a path provided by the user. It also allows downloading that file via a form in the browser.
 
-Ilość znaków w każdym kodzie oraz ilość kodów jest podawana przez użytkownika.
+The number of characters in each code and the total number of codes are set by the user.
 
-Aby przetestować aplikację:
-1. `composer install`
-2.  zainstalować CLI symfony https://symfony.com/download
-3. `symfony serve`
+To test the app:
 
-Aby przetestować aplikację w przeglądarce, wejść na `localhost:8000`
+Run composer install
 
-Aby przetestować aplikację CLI użyć komendy `php bin/console generate`, na przykład:
-- Windows: `php bin/console generate 10 20 'C:\Users\Michael\kody.txt'`
-- Linux/MacOS `php bin/console generate 50, 10, '/Users/michalsniezko/mojekody.txt'`
+Install Symfony CLI: https://symfony.com/download
 
-Użyłem argumentów CLI zamiast opcji gdyż te drugie są zawsze opcjonalne,
- a w przypadku tej aplikacji użytkownik musi podać
- ilość i długość kodu oraz ścieżkę.
- 
- W przypadku nie podania ścieżki absolutnej, aplikacja stworzy plik relatywnie do swojego document root.
- 
- Zdecydowałem się na użycie tmp filesystem do tworzenia plików w locie.
+Run the server with symfony serve
+
+Open your browser at localhost:8000
+
+To test via CLI, use the command php bin/console generate, for example:
+
+Windows:
+php bin/console generate 10 20 'C:\Users\Michael\codes.txt'
+
+Linux/MacOS:
+php bin/console generate 50 10 '/Users/michalsniezko/mycodes.txt'
+
+I used CLI arguments instead of options because options are always optional, but here the user must provide the number of codes, the length of each code, and the file path.
+
+If no absolute path is given, the app creates the file relative to its document root.
+
+I chose to use the temporary filesystem (tmp) for creating files on the fly.
+
